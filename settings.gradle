@@ -1,0 +1,2 @@
+rootProject.name = "PvZ-Xenon"
+include ':app'

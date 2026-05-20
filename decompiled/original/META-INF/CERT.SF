@@ -1,0 +1,98 @@
+Signature-Version: 1.0
+Created-By: Apktool M
+SHA1-Digest-Manifest: dg8cF6Wy5/aGL3A6NvZI+Ap5pHA=
+X-Android-APK-Signed: 2
+
+Name: AndroidManifest.xml
+SHA1-Digest: ZE1xBi7PusU5gMt7BDyXjvErQtE=
+
+Name: assets/files.zip
+SHA1-Digest: H/TZgZp+141RU2vkk2tNsqF4fXs=
+
+Name: assets/userdata.zip
+SHA1-Digest: yC8QNNKv/haizNLK30COYx3M9LE=
+
+Name: classes.dex
+SHA1-Digest: VrZ6QheB3HZ2QoP4kZ8Vr+k7YS4=
+
+Name: lib/armeabi-v7a/libGameLauncher.so
+SHA1-Digest: PHQ/UevML9hrztcTXfM0JTnKBRo=
+
+Name: lib/armeabi-v7a/libGameMain.so
+SHA1-Digest: +u11S/i7aWANMDCne/74efYf2RU=
+
+Name: lib/armeabi-v7a/libHomura.so
+SHA1-Digest: 4zK+l1nky7rBSCpXcBiJo2sR4HY=
+
+Name: res/drawable-anydpi-v21/button_stop.xml
+SHA1-Digest: HOEBROf1PO2qiQ+JWw4Mn+v3ZFU=
+
+Name: res/drawable-anydpi-v26/set.xml
+SHA1-Digest: e+9ExC5wh9Vr+Gdz0VkKsXeas1k=
+
+Name: res/drawable-hdpi/button_stop.png
+SHA1-Digest: HME5/OWhXP124yxr/r/20O7n+KE=
+
+Name: res/drawable-ldpi/button_stop.png
+SHA1-Digest: q8OdjeDRlMkJ4MddrzyL+Ie/FUQ=
+
+Name: res/drawable-mdpi/button_stop.png
+SHA1-Digest: cl/R0lGSdzZiPmM17tF1Om5M74w=
+
+Name: res/drawable-v26/fg.png
+SHA1-Digest: pEN3kUeCqjeyF+QodGIi1ZUIbq0=
+
+Name: res/drawable-xhdpi/button_stop.png
+SHA1-Digest: bUbdHBbbWxNy2adStvWmzaEih6g=
+
+Name: res/drawable-xxhdpi/button_stop.png
+SHA1-Digest: M5wcIetp/DoSWhtMn1I+8DEQ5jo=
+
+Name: res/drawable-xxxhdpi/button_stop.png
+SHA1-Digest: dGI2dOrmCi5XlXzCbAkuLI3sSvQ=
+
+Name: res/drawable/button_a.png
+SHA1-Digest: atw0K9rW/0Cd0Gn6rbp/mRxQN5c=
+
+Name: res/drawable/button_b.png
+SHA1-Digest: QRGylb41J5/fsTpmuTteJJyGrvQ=
+
+Name: res/drawable/button_invisible.png
+SHA1-Digest: V+qN4ku5iB3lhx4I43JxB+UQrQ8=
+
+Name: res/drawable/button_stop.png
+SHA1-Digest: dZHRnL5hnZLF/yhE8s3HbyZc/No=
+
+Name: res/drawable/button_visible.png
+SHA1-Digest: 04iwntqkezXwQJCtHFvoID21J3Q=
+
+Name: res/drawable/button_x.png
+SHA1-Digest: xSYFTR/il21i3OPUDu7Qhkp0o9A=
+
+Name: res/drawable/button_y.png
+SHA1-Digest: 8hEiCpKIUaJFbsVs8+U1Xe7PKfA=
+
+Name: res/drawable/dpad.png
+SHA1-Digest: ZpwASuC8AZjNJtKHXQt84B5MHDg=
+
+Name: res/drawable/menu_icon.png
+SHA1-Digest: dVGtwFBrcLvMsBRk7yuMNlBWULQ=
+
+Name: res/mipmap-anydpi-v26/icon.xml
+SHA1-Digest: 1rSNEwMkXcE9TR0qAPtzyTxAUUk=
+
+Name: res/mipmap-anydpi-v26/set.xml
+SHA1-Digest: AsKngV/7LKf5k8vMBgm2Nr5l/+o=
+
+Name: res/mipmap/icon.png
+SHA1-Digest: tLyXS8tOYZeS3tLvZa0V8TSHjOw=
+
+Name: res/mipmap/set.png
+SHA1-Digest: 6avrNqPZMWd+jHmwvApquG1WaRY=
+
+Name: res/xml-v25/shortcuts.xml
+SHA1-Digest: /k2wFVizzOGTgpmYmpwVLoOL1gI=
+
+Name: resources.arsc
+SHA1-Digest: 8xE7ttj7SknINI2HvQe0YSSu6wM=
+

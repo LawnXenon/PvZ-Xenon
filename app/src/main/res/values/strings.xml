@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Cancel">Cancel</string>
+    <string name="Ensure">Confirm</string>
+    <string name="NdCurCoin">You M Coin</string>
+    <string name="NdGetCoin">Get M Coin</string>
+    <string name="NdGetCoinError">Get M Coin Error</string>
+    <string name="NdGiftProductName">Unlock or Try Demo</string>
+    <string name="NdLogOut">Register a 91 account</string>
+    <string name="NdLogOutSucess">Logout Successfully</string>
+    <string name="NdLoginError">Error in Login :</string>
+    <string name="NdLoginFailed">Login Fail</string>
+    <string name="NdLoginSucess">Login Succeed</string>
+    <string name="NdPayCancle">Payment Cancel</string>
+    <string name="NdPayError">Error in Payment</string>
+    <string name="NdPayFailed">Payment Fail</string>
+    <string name="NdPaySucess">Payment Succeed</string>
+    <string name="NdTextBody">"1.Full version has all segments and items unlocked。
+2.Full version can be updated to the latest version for free."</string>
+    <string name="NdTextNeedUse">Cost M Coin :</string>
+    <string name="NdTextPaidFailed">Buying Fail</string>
+    <string name="NdTextPaidSuccess">Buying Succeed</string>
+    <string name="NdTextUsePoint">Use MCoin</string>
+    <string name="NetworkError">Please Confirm Your Network Connection</string>
+    <string name="TextAlipayTitle">Upgrade To Full Version?</string>
+    <string name="TextBody">"1.Full version has all segments and items unlocked 
+2.Full version can be updated to the latest version for free. 
+3.Full version has no advertisement"</string>
+    <string name="TextCancel">Cancel</string>
+    <string name="TextCheckPayVersion">"It's now checking the version of secure payment service."</string>
+    <string name="TextCurrentPoint">Credit Account Balance :</string>
+    <string name="TextFullOpenPoint">Unlock Credits Cost :</string>
+    <string name="TextGoToPay">Confirm To Pay</string>
+    <string name="TextHasUpdateTitle">New Version is Available, Upgrade?</string>
+    <string name="TextMoreGame">Transmension Game Center</string>
+    <string name="TextNeedUse">Credits Cost :</string>
+    <string name="TextNotGoToPay">Cancel</string>
+    <string name="TextOK">Confirm</string>
+    <string name="TextOnlyPayMsg">Buy Full Version</string>
+    <string name="TextOnlyPayTitle">Buy</string>
+    <string name="TextPaidFailed">Failed</string>
+    <string name="TextPaidSuccess">Successful</string>
+    <string name="TextPayError">Error</string>
+    <string name="TextPayErrorMsg">Sorry, Payment Cannot Be Fulfilled, Please Exit And Try Again.</string>
+    <string name="TextPayToFullVersion">Buy Full Version</string>
+    <string name="TextPaying">Paying, Please wait</string>
+    <string name="TextReturnPoint">Credits Obtained :</string>
+    <string name="TextReturnPointSuccess">Credits Obtained :</string>
+    <string name="TextSubject">Full Version</string>
+    <string name="TextTip">Instruction</string>
+    <string name="TextUpdateProcessMsg">Upgrading</string>
+    <string name="TextUpdateProcessTitle">"It's Upgrading"</string>
+    <string name="TextUsePoint">Use Credits</string>
+    <string name="TextYourScore">Your Credits :</string>
+    <string name="addon_set">附加设置</string>
+    <string name="appNotProperlyInstalled">"This application isn't properly installed. Please uninstall the application and remove its data completely, then reinstall it again."</string>
+    <string name="app_name">Plants Vs Zombies</string>
+    <string name="button_set">设置内置键盘</string>
+    <string name="check_sign_failed">Your Order Information Has Been Altered Illegally。</string>
+    <string name="confirm_install">"To ensure the safety of your payment, you need to install Alipay for secure payment service before paying. 
+
+ Click To Install"</string>
+    <string name="confirm_install_hint">Instruction For Installment</string>
+    <string name="dataFullMessage">The internal storage is full. Free some space to run this application.</string>
+    <string name="errorTittle">Error</string>
+    <string name="openappoffer">Earn Credits For Free</string>
+    <string name="unzip">解压资源包</string>
+    <string name="viewpoint">Credits Account</string>
+    <string name="without_button">启动原版TV版</string>
+</resources>
