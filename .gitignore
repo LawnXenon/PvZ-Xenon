@@ -3,3 +3,5 @@
 build/
 app/build/
 *.apk
+app/src/main/assets/files.zip
+decompiled/assets/files.zip
