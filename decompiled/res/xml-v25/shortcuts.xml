@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shortcuts
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <shortcut android:icon="@mipmap/set" android:enabled="true" android:shortcutId="ScrOff" android:shortcutShortLabel="@string/addon_set">
-        <intent android:targetPackage="com.trans.pvz" android:action="android.intent.action.VIEW" android:targetClass="com.trans.SetActivity" />
-        <categories android:name="android.shortcut.conversation" />
-        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
-    </shortcut>
-</shortcuts>
