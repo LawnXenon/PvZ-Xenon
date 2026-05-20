@@ -1,13 +1,21 @@
 package com.trans;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileObserver;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import java.io.File;
@@ -103,14 +111,174 @@ public class GameActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            setTheme(android.R.style.Theme_Holo_NoActionBar_Fullscreen);
+        }
+
+        Window window = getWindow();
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            window.getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.setNavigationBarContrastEnforced(false);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(0);
+            window.setNavigationBarColor(0);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.setAttributes(params);
+        } else {
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false);
+            WindowInsetsController controller = window.getInsetsController();
+            if (controller != null) {
+                controller.hide(WindowInsets.Type.statusBars() | WindowInsets.Type.displayCutout());
+                controller.setSystemBarsBehavior(
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+            }
+        }
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = getSharedPreferences("data", MODE_PRIVATE);
+        isFileObserverLaunched = prefs.getBoolean("autoBackUp", true);
+        if (isFileObserverLaunched) {
+            checkAndDeleteOldBackups();
+            File userdataDir = new File(getExternalFilesDir(null), "userdata");
+            fileObserver = new FileObserver(userdataDir.getAbsolutePath(), FileObserver.CLOSE_WRITE) {
+                @Override
+                public void onEvent(int event, String path) {
+                    // backup hook from original APK
+                }
+            };
+            fileObserver.startWatching();
+        }
+
+        if (prefs.getBoolean("first", true) || !isGameDataInstalled(this)) {
+            startActivity(new Intent(this, UnzipActivity.class));
+            finish();
+            return;
+        }
+
+        // Modern Android: native libs live in nativeLibraryDir (not dataDir/lib or /system/lib/<pkg>).
+        String libDir = getApplicationInfo().nativeLibraryDir;
+        if (libDir == null || libDir.isEmpty()) {
+            libDir = getApplicationInfo().dataDir + "/lib";
+        }
+        Log.i(TAG, "Loading native libs from: " + libDir);
+        boolean loaded = GameJni.load(new String[]{libDir});
+        if (!loaded || !GameJni.isGameMainLoaded()) {
+            Log.e(TAG, "Native load failed (Xenon=" + loaded + ", GameMain=" + GameJni.isGameMainLoaded() + ")");
+            finish();
+            return;
+        }
+
+        setup();
+    }
+
+    public void setup() {
+        if (GameJni.isInitialized()) {
+            finish();
+            return;
+        }
         mCurActivity = this;
+        startGame();
+        mVideo = new GameVideo(this);
+    }
+
+    /** Music/images are read from external storage after files.zip is extracted. */
+    public static boolean isGameDataInstalled(GameActivity activity) {
+        if (activity == null) {
+            return false;
+        }
+        File probe = new File(activity.getExternalFilesDir(null), "music/crazydave.ogg");
+        return probe.isFile() && probe.length() > 0;
+    }
+
+    public void startGame() {
+        ACPManager.getInstance().setAssets(getAssets(), "files/");
+        mView = new GameView(getApplication(), this);
+        if (mLayout == null) {
+            mLayout = new FrameLayout(this);
+        }
+        mLayout.setBackgroundColor(0xFF000000);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = android.view.Gravity.CENTER;
+        mLayout.addView(mView, params);
+        setContentView(mLayout);
+        new Thread(() -> GameJni.setFullVersion(true)).start();
+    }
+
+    public GameView getView() {
+        return mView;
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause()");
+        if (mView != null) {
+            mView.onPause();
+        }
+        GameAudio.getInstance().pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume()");
+        super.onResume();
+        if (mView != null) {
+            mView.onResume();
+        }
+        GameAudio.getInstance().resume();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if (mView != null) {
+            mView.onConfigurationChanged(newConfig);
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
     protected void onDestroy() {
+        Log.d(TAG, "onDestroy()");
+        if (mView != null) {
+            mView.stopGame();
+        }
+        if (mVideo != null) {
+            mVideo.destroy();
+        }
+        if (mCurActivity == this) {
+            mCurActivity = null;
+        }
+        if (isFileObserverLaunched && fileObserver != null) {
+            fileObserver.stopWatching();
+        }
         super.onDestroy();
-        mCurActivity = null;
+    }
+
+    public void shutdown() {
+        if (mView != null) {
+            mView.stopGame();
+        }
+        finish();
     }
 
     // --- Public API called from native / JNI ---
@@ -140,6 +308,22 @@ public class GameActivity extends Activity {
             mLayout.removeView(mVideo.getView());
         }
     }
+
+    public void goToMarket() {}
+    public void hideAD() {}
+    public void postData(String a, String b) {}
+    public void postXMLFileData(String a) {}
+    public void restoreCursor() {}
+    public void show91MoreGame() {}
+    public void showAD(int a, int b) {}
+    public void showAlipay() {}
+    public boolean showCursor(boolean show) { return true; }
+    public void showDataFullDialog() {}
+    public void showMessageBox(String title, String msg, int a, int b) {}
+    public void showMoreGame() {}
+    public void showNdpay() {}
+    public void showOffer(String a, int b, int c, int d, int e, int f, int g) {}
+    public void installPackage(String path) {}
 
     public void _goToMarket() {}
     public void _hideAD() {}
@@ -183,6 +367,27 @@ public class GameActivity extends Activity {
 
     public int getKeyboard() {
         return getResources().getConfiguration().keyboard;
+    }
+
+    /** Called from native via GameLauncher instance (AGGetTouchScreen). */
+    public int getTouchScreen() {
+        return getResources().getConfiguration().touchscreen;
+    }
+
+    public GameVideo getVideoPlayer() {
+        return mVideo;
+    }
+
+    public boolean hasSensor(int type) {
+        return false;
+    }
+
+    public boolean startSensor(int type) {
+        return false;
+    }
+
+    public boolean stopSensor(int type) {
+        return false;
     }
 
     public String getLocale() {

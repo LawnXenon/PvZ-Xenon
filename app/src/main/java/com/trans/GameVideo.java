@@ -39,7 +39,17 @@ public class GameVideo implements
 
     public GameVideo(GameActivity activity) {
         mActivity = activity;
-        mHandler = new android.os.Handler();
+        mHandler = new android.os.Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                if (msg.what == SHOW_VIDEO) {
+                    _show(true);
+                } else if (msg.what == HIDE_VIDEO) {
+                    _show(false);
+                }
+                super.handleMessage(msg);
+            }
+        };
 
         mView = new SurfaceView(activity);
         mHolder = mView.getHolder();
@@ -129,6 +139,56 @@ public class GameVideo implements
         if (mPath == null || mMediaPlayer == null) return false;
         if (mStartPending) return true;
         return mMediaPlayer.isPlaying();
+    }
+
+    public boolean pause() {
+        if (mPath == null || mMediaPlayer == null) {
+            return false;
+        }
+        try {
+            mMediaPlayer.pause();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean play() {
+        android.util.Log.i(TAG, "play()");
+        if (mPath == null || mMediaPlayer == null) {
+            return false;
+        }
+        try {
+            if (!mPrepared && mPreparePending && mHasSurface) {
+                mMediaPlayer.prepareAsync();
+                mPreparePending = false;
+            }
+            if (mPrepared) {
+                mMediaPlayer.start();
+            } else {
+                mStartPending = true;
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean resume() {
+        if (mPath == null || mMediaPlayer == null) {
+            return false;
+        }
+        try {
+            mMediaPlayer.start();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void show(boolean visible) {
+        mHandler.obtainMessage(visible ? SHOW_VIDEO : HIDE_VIDEO).sendToTarget();
     }
 
     public void onPause() {}

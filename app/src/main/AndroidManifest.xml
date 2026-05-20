@@ -28,7 +28,7 @@
             android:name="com.trans.SetActivityEntrance"
             android:exported="true"
             android:icon="@mipmap/set"
-            android:label="附加设置"
+            android:label="@string/settings_title"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,13 +40,13 @@
             android:name="com.trans.SetActivity"
             android:exported="true"
             android:icon="@mipmap/set"
-            android:label="附加设置" />
+            android:label="@string/settings_title" />
 
         <activity
             android:name="com.trans.UnzipActivity"
             android:exported="true"
             android:icon="@mipmap/set"
-            android:label="@string/unzip" />
+            android:label="@string/unzip_title" />
 
         <meta-data
             android:name="android.max_aspect"

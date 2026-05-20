@@ -4,7 +4,9 @@
 #include "hooks/hook_registry.h"
 #include "hook.h"
 #include <dlfcn.h>
+#include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 namespace Xenon {
 
@@ -16,39 +18,57 @@ namespace Xenon {
     // Type signature for JNI_OnLoad
     typedef jint (*JNI_OnLoad_t)(JavaVM*, void*);
 
+    static void* DlopenLib(const char* soname) {
+        void* handle = dlopen(soname, RTLD_NOW | RTLD_GLOBAL);
+        if (handle) {
+            return handle;
+        }
+
+        const char* libDir = getenv("XENON_LIB_DIR");
+        if (libDir && libDir[0]) {
+            char path[512];
+            snprintf(path, sizeof(path), "%s/%s", libDir, soname);
+            handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
+            if (handle) {
+                LOGI("Loaded %s via XENON_LIB_DIR", soname);
+                return handle;
+            }
+        }
+
+        LOGE("dlopen(%s) failed: %s", soname, dlerror());
+        return nullptr;
+    }
+
     bool Initialize(JavaVM* vm) {
         LOGI("Initializing Xenon Replacement Engine...");
 
-        // 1. Load original GameLauncher (renamed to libGameLauncher_orig.so)
-        gOriginalLauncherHandle = dlopen("libGameLauncher_orig.so", RTLD_NOW | RTLD_GLOBAL);
+        // C++ runtime (often required for libGameMain to link)
+        DlopenLib("libstdc++-shared.so");
+
+        // 1. Original launcher JNI/EGL layer
+        gOriginalLauncherHandle = DlopenLib("libGameLauncher_orig.so");
         if (!gOriginalLauncherHandle) {
-            LOGE("Failed to load libGameLauncher_orig.so: %s", dlerror());
             return false;
         }
         LOGI("Successfully loaded libGameLauncher_orig.so at %p", gOriginalLauncherHandle);
 
-        // 2. Load original GameMain (contains the 7.4 MB PopCap game logic)
-        gOriginalMainHandle = dlopen("libGameMain.so", RTLD_NOW | RTLD_GLOBAL);
-        if (!gOriginalMainHandle) {
-            LOGE("Failed to load libGameMain.so: %s", dlerror());
-            // We don't fail immediately in case they want a dry-run or launcher-only mode
+        // 2. Homura before GameMain (GameMain may depend on it)
+        gOriginalHomuraHandle = DlopenLib("libHomura.so");
+        if (gOriginalHomuraHandle) {
+            LOGI("Successfully loaded libHomura.so at %p", gOriginalHomuraHandle);
         } else {
-            LOGI("Successfully loaded libGameMain.so at %p", gOriginalMainHandle);
-            
-            // Resolve original dynamic symbols from libGameMain.so
-            Original::ResolveOriginalSymbols();
-            
-            // Register and apply function hooks
-            Hooks::RegisterAllHooks();
-            ApplyAllHooks();
+            LOGW("libHomura.so not loaded (may be optional)");
         }
 
-        // 3. Load original Homura (support library)
-        gOriginalHomuraHandle = dlopen("libHomura.so", RTLD_NOW | RTLD_GLOBAL);
-        if (!gOriginalHomuraHandle) {
-            LOGW("libHomura.so not found or failed to load: %s (non-critical)", dlerror());
+        // 3. Game logic (~7.4 MB) — must be loaded before surfaceCreated
+        gOriginalMainHandle = DlopenLib("libGameMain.so");
+        if (!gOriginalMainHandle) {
+            LOGE("libGameMain.so is required; hooks and game init will not work");
         } else {
-            LOGI("Successfully loaded libHomura.so at %p", gOriginalHomuraHandle);
+            LOGI("Successfully loaded libGameMain.so at %p", gOriginalMainHandle);
+            Original::ResolveOriginalSymbols();
+            Hooks::RegisterAllHooks();
+            ApplyAllHooks();
         }
 
         // 4. Resolve and invoke original JNI_OnLoad to let the original game register its native JNI endpoints

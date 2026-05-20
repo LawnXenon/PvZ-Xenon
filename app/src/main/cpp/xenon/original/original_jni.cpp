@@ -2,6 +2,10 @@
 #include "xenon.h"
 #include "logger.h"
 
+static bool IsGameReady() {
+    return Xenon::GetOriginalMainHandle() != nullptr;
+}
+
 // Define a macro to generate the JNI forwarding logic cleanly and efficiently
 #define FORWARD_JNI_CALL(func_name, return_type, signature, ...) \
     typedef return_type (*func_t)signature; \
@@ -35,6 +39,10 @@ extern "C" {
     }
 
     JNIEXPORT void JNICALL Java_com_trans_GameJni_init(JNIEnv* env, jclass clazz, jstring s1, jstring s2, jstring s3, jobject view, jobject activity, jobject bundle, jint i1, jint i2) {
+        if (!IsGameReady()) {
+            LOGE("init: libGameMain.so not loaded");
+            return;
+        }
         FORWARD_JNI_VOID_CALL(Java_com_trans_GameJni_init, (JNIEnv*, jclass, jstring, jstring, jstring, jobject, jobject, jobject, jint, jint), env, clazz, s1, s2, s3, view, activity, bundle, i1, i2);
     }
 
@@ -79,10 +87,16 @@ extern "C" {
     }
 
     JNIEXPORT jboolean JNICALL Java_com_trans_GameJni_render(JNIEnv* env, jclass clazz) {
+        if (!IsGameReady()) {
+            return JNI_FALSE;
+        }
         FORWARD_JNI_CALL(Java_com_trans_GameJni_render, jboolean, (JNIEnv*, jclass), env, clazz);
     }
 
     JNIEXPORT jboolean JNICALL Java_com_trans_GameJni_resume(JNIEnv* env, jclass clazz) {
+        if (!IsGameReady()) {
+            return JNI_FALSE;
+        }
         FORWARD_JNI_CALL(Java_com_trans_GameJni_resume, jboolean, (JNIEnv*, jclass), env, clazz);
     }
 
@@ -103,6 +117,10 @@ extern "C" {
     }
 
     JNIEXPORT void JNICALL Java_com_trans_GameJni_surfaceCreated(JNIEnv* env, jclass clazz) {
+        if (!Xenon::GetOriginalMainHandle()) {
+            LOGE("surfaceCreated: libGameMain.so not loaded — aborting to avoid SIGSEGV");
+            return;
+        }
         FORWARD_JNI_VOID_CALL(Java_com_trans_GameJni_surfaceCreated, (JNIEnv*, jclass), env, clazz);
     }
 

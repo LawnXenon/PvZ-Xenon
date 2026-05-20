@@ -1,7 +1,69 @@
+# =============================================================================
+# PvZ-Xenon — ignore generated, local, and third-party/binary artifacts.
+# Source to keep: app/src/main/java, cpp, res, manifests, gradle wrapper, CMake.
+# Before building: copy files.zip from a reference APK into app/src/main/assets/
+#                  and native .so libs into app/src/main/jniLibs/armeabi-v7a/
+# =============================================================================
+
+# --- IDE / editors ---
+.idea/
+.vscode/
 .vs/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# --- Gradle & Android build outputs ---
 .gradle/
-build/
-app/build/
+**/build/
+.cxx/
+.externalNativeBuild/
+captures/
+output/
+local.properties
+
+# --- Packaged apps ---
 *.apk
-app/src/main/assets/files.zip
-decompiled/assets/files.zip
+*.aab
+*.ap_
+*.dex
+
+# --- NDK / CMake (generated; libXenon.so is produced under build/) ---
+**/.cxx/
+**/obj/
+**/.externalNativeBuild/
+
+# --- Prebuilt native libs from original PvZ TV APK (not project source) ---
+app/src/main/jniLibs/
+*.so
+*.so.*
+
+# --- Large game assets (ship via APK build, not git) ---
+app/src/main/assets/
+!app/src/main/assets/.gitkeep
+
+# --- APK extract / decompile reference trees (local analysis only) ---
+_apk_extract/
+decompiled/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# --- Logs, crashes, temp ---
+*.log
+hs_err_pid*
+replay_pid*
+*.tmp
+*.temp
+*.swp
+*~
+
+# --- Optional tooling caches ---
+.kotlin/
+*.hprof

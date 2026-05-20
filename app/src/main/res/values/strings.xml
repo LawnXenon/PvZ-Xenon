@@ -52,10 +52,27 @@
     <string name="TextUpdateProcessTitle">"It's Upgrading"</string>
     <string name="TextUsePoint">Use Credits</string>
     <string name="TextYourScore">Your Credits :</string>
-    <string name="addon_set">附加设置</string>
+    <string name="addon_set">Extra Settings</string>
+    <string name="settings_title">Extra Settings</string>
+    <string name="settings_intro">Settings for PvZ TV (aspect ratio, saves, launcher icon).</string>
+    <string name="settings_fullscreen">Fullscreen (16:9)</string>
+    <string name="settings_save_aspect">Save aspect ratio</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_import_save">Import save (zip)</string>
+    <string name="settings_pick_zip">Pick a zip file</string>
+    <string name="settings_restore_backup">Restore from backup</string>
+    <string name="settings_restore_todo">Restore not implemented yet</string>
+    <string name="settings_auto_backup">Auto-backup saves on exit</string>
+    <string name="settings_import_full_save">Import full save (long-press for hint)</string>
+    <string name="settings_import_full_hint">Place save zip in app storage or use document picker</string>
+    <string name="settings_export_save">Export save (zip)</string>
+    <string name="settings_export_filename">pvz_save.zip</string>
+    <string name="settings_operation_done">Done</string>
+    <string name="settings_hide_icon">Hide settings launcher icon</string>
+    <string name="unzip_title">Extract game assets</string>
     <string name="appNotProperlyInstalled">"This application isn't properly installed. Please uninstall the application and remove its data completely, then reinstall it again."</string>
     <string name="app_name">Plants Vs Zombies</string>
-    <string name="button_set">设置内置键盘</string>
+    <string name="button_set">Configure on-screen keyboard</string>
     <string name="check_sign_failed">Your Order Information Has Been Altered Illegally。</string>
     <string name="confirm_install">"To ensure the safety of your payment, you need to install Alipay for secure payment service before paying. 
 
@@ -64,7 +81,7 @@
     <string name="dataFullMessage">The internal storage is full. Free some space to run this application.</string>
     <string name="errorTittle">Error</string>
     <string name="openappoffer">Earn Credits For Free</string>
-    <string name="unzip">解压资源包</string>
+    <string name="unzip">Extract assets</string>
     <string name="viewpoint">Credits Account</string>
-    <string name="without_button">启动原版TV版</string>
+    <string name="without_button">Launch original TV build</string>
 </resources>

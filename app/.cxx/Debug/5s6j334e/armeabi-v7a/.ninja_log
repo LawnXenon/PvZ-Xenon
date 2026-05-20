@@ -1,12 +1,11 @@
 # ninja log v5
-17	611	8009896584945325	CMakeFiles/GameLauncher.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	f441cc8aabc381a0
-14	1451	8009896594169411	CMakeFiles/GameLauncher.dir/xenon/hooks/hook_registry.cpp.o	5dd10d818e638d28
-6	1616	8009896595826522	CMakeFiles/GameLauncher.dir/xenon/core/xenon.cpp.o	a46a2053ed922121
-1	1644	8009896596097593	CMakeFiles/GameLauncher.dir/xenon/core/hook.cpp.o	86deab5bb3f6e9fa
-12	337	8009907698241868	CMakeFiles/GameLauncher.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	ca6f50d6428f7747
-16	425	8009907699141862	CMakeFiles/GameLauncher.dir/xenon/original/original_symbols.cpp.o	f9ee97700371c20c
-18	503	8009907699481841	CMakeFiles/GameLauncher.dir/xenon/original/original_jni.cpp.o	de4b7a27eee9c9f1
-3	936	8009907704504796	CMakeFiles/GameLauncher.dir/xenon/core/hook.cpp.o	f193044e71af1502
-8	965	8009907704924773	CMakeFiles/GameLauncher.dir/xenon/core/xenon.cpp.o	db8479ec39a46d5
-21	971	8009907704974804	CMakeFiles/GameLauncher.dir/xenon/hooks/hook_registry.cpp.o	3c69e05cca47a9d6
-972	1144	8009907706589931	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libGameLauncher.so	38bd1047e86d9ea4
+10	215	8010035575703094	CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o	8d4c26418881bcbc
+8	246	8010035576044900	CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o	da94fe23da161352
+13	242	8010035575761695	CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	143d5b6debdccdb
+7	550	8010036058923377	CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o	6200e4d99379f02c
+10	466	8010036058093033	CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o	636692312dbaa9b8
+4	498	8010036058415242	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
+550	707	8010036060388156	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	4a800d4189ccc4f6
+13	260	8010042662012263	CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o	da94fe23da161352
+5	777	8010042667265794	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
+777	1017	8010042669492253	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	4a800d4189ccc4f6

@@ -26,14 +26,15 @@ set(SOURCE_FILES
     xenon/hooks/hook_registry.cpp
 )
 
-# Declare our library
-add_library(GameLauncher SHARED ${SOURCE_FILES})
+# Xenon hook library — must NOT be named libGameLauncher.so because
+# libGameMain.so links against the original libGameLauncher.so at load time.
+add_library(Xenon SHARED ${SOURCE_FILES})
 
 # Locate Android NDK Log library
 find_library(log-lib log)
 
 # Link necessary libraries
-target_link_libraries(GameLauncher
+target_link_libraries(Xenon
     ${log-lib}
     android
 )
