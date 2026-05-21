@@ -65,6 +65,14 @@ build CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o: CXX_COMPILER__Xenon_Debug C$:/
   OBJECT_DIR = CMakeFiles\Xenon.dir
   OBJECT_FILE_DIR = CMakeFiles\Xenon.dir\xenon\core
 
+build CMakeFiles/Xenon.dir/xenon/core/arm32_hook.cpp.o: CXX_COMPILER__Xenon_Debug C$:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/core/arm32_hook.cpp || cmake_object_order_depends_target_Xenon
+  DEFINES = -DXenon_EXPORTS
+  DEP_FILE = CMakeFiles\Xenon.dir\xenon\core\arm32_hook.cpp.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++17 -frtti -fexceptions -fno-limit-debug-info  -fPIC -std=c++17
+  INCLUDES = -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/core -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/original -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/reconstructed -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/hooks -IC:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/sexy
+  OBJECT_DIR = CMakeFiles\Xenon.dir
+  OBJECT_FILE_DIR = CMakeFiles\Xenon.dir\xenon\core
+
 build CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o: CXX_COMPILER__Xenon_Debug C$:/Users/nydil/source/repos/PvZ-Xenon/app/src/main/cpp/xenon/original/original_jni.cpp || cmake_object_order_depends_target_Xenon
   DEFINES = -DXenon_EXPORTS
   DEP_FILE = CMakeFiles\Xenon.dir\xenon\original\original_jni.cpp.o.d
@@ -105,7 +113,7 @@ build CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o: CXX_COMPILER__Xenon_
 #############################################
 # Link the shared library C:\Users\nydil\source\repos\PvZ-Xenon\app\build\intermediates\cxx\Debug\5s6j334e\obj\armeabi-v7a\libXenon.so
 
-build C$:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so: CXX_SHARED_LIBRARY_LINKER__Xenon_Debug CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o | C$:/Users/nydil/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so
+build C$:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so: CXX_SHARED_LIBRARY_LINKER__Xenon_Debug CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o CMakeFiles/Xenon.dir/xenon/core/arm32_hook.cpp.o CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o | C$:/Users/nydil/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++17 -frtti -fexceptions -fno-limit-debug-info
   LINK_FLAGS = -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments
   LINK_LIBRARIES = C:/Users/nydil/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so  -landroid  -latomic -lm

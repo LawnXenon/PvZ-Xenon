@@ -111,7 +111,17 @@ public class GameActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Fix: Force the window to OPAQUE so Android's compositor does NOT
+        // apply alpha-blending between the GL surface and the window background.
+        // Without this, any semi-transparent pixel rendered by OpenGL gets
+        // double-blended (once by GL, once by the HWC/SurfaceFlinger), producing
+        // visible graphical artefacts on images with partial transparency.
+        // This must be set BEFORE super.onCreate(), which is when the Window
+        // surface is first allocated.
+        getWindow().setFormat(android.graphics.PixelFormat.OPAQUE);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setTheme(android.R.style.Theme_Holo_NoActionBar_Fullscreen);
         }
@@ -250,9 +260,6 @@ public class GameActivity extends Activity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (mView != null) {
-            mView.onConfigurationChanged(newConfig);
-        }
         super.onConfigurationChanged(newConfig);
     }
 
@@ -309,24 +316,24 @@ public class GameActivity extends Activity {
         }
     }
 
-    public void goToMarket() {}
-    public void hideAD() {}
-    public void postData(String a, String b) {}
-    public void postXMLFileData(String a) {}
-    public void restoreCursor() {}
-    public void show91MoreGame() {}
-    public void showAD(int a, int b) {}
-    public void showAlipay() {}
-    public boolean showCursor(boolean show) { return true; }
-    public void showDataFullDialog() {}
-    public void showMessageBox(String title, String msg, int a, int b) {}
-    public void showMoreGame() {}
-    public void showNdpay() {}
-    public void showOffer(String a, int b, int c, int d, int e, int f, int g) {}
-    public void installPackage(String path) {}
+    public void goToMarket() { Log.w(TAG, "goToMarket()"); }
+    public void hideAD() { Log.w(TAG, "hideAD()"); }
+    public void postData(String a, String b) { Log.w(TAG, "postData()"); }
+    public void postXMLFileData(String a) { Log.w(TAG, "postXMLFileData()"); }
+    public void restoreCursor() { Log.w(TAG, "restoreCursor()"); }
+    public void show91MoreGame() { Log.w(TAG, "show91MoreGame()"); }
+    public void showAD(int a, int b) { Log.w(TAG, "showAD(" + a + ", " + b + ")"); }
+    public void showAlipay() { Log.w(TAG, "showAlipay()"); }
+    public boolean showCursor(boolean show) { Log.w(TAG, "showCursor(" + show + ")"); return true; }
+    public void showDataFullDialog() { Log.w(TAG, "showDataFullDialog()"); }
+    public void showMessageBox(String title, String msg, int a, int b) { Log.w(TAG, "showMessageBox(" + title + ")"); }
+    public void showMoreGame() { Log.w(TAG, "showMoreGame()"); }
+    public void showNdpay() { Log.w(TAG, "showNdpay()"); }
+    public void showOffer(String a, int b, int c, int d, int e, int f, int g) { Log.w(TAG, "showOffer()"); }
+    public void installPackage(String path) { Log.w(TAG, "installPackage()"); }
 
-    public void _goToMarket() {}
-    public void _hideAD() {}
+    public void _goToMarket() { Log.w(TAG, "_goToMarket()"); }
+    public void _hideAD() { Log.w(TAG, "_hideAD()"); }
     public boolean _isDisplayCursor() { return true; }
     public void _postData(String a, String b) {}
     public void _postXMLFileData(String a) {}

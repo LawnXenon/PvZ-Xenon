@@ -1,11 +1,16 @@
 # ninja log v5
-10	215	8010035575703094	CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o	8d4c26418881bcbc
-8	246	8010035576044900	CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o	da94fe23da161352
-13	242	8010035575761695	CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	143d5b6debdccdb
-7	550	8010036058923377	CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o	6200e4d99379f02c
-10	466	8010036058093033	CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o	636692312dbaa9b8
-4	498	8010036058415242	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
-550	707	8010036060388156	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	4a800d4189ccc4f6
-13	260	8010042662012263	CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o	da94fe23da161352
-5	777	8010042667265794	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
-777	1017	8010042669492253	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	4a800d4189ccc4f6
+46	380	8010174944663858	CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o	8d4c26418881bcbc
+43	406	8010174944991310	CMakeFiles/Xenon.dir/xenon/original/original_jni.cpp.o	da94fe23da161352
+52	384	8010174944629375	CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	143d5b6debdccdb
+25	850	8010174949439275	CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o	6200e4d99379f02c
+381	898	8010174949972281	CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o	636692312dbaa9b8
+49	397	8010174944874150	CMakeFiles/Xenon.dir/xenon/core/arm32_hook.cpp.o	6cecf4c86d0d6496
+40	788	8010174948828128	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
+898	1250	8010174953398394	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	bcfed78d15a251d8
+42	468	8010222883149703	CMakeFiles/Xenon.dir/xenon/original/original_symbols.cpp.o	8d4c26418881bcbc
+48	483	8010222883252543	CMakeFiles/Xenon.dir/xenon/reconstructed/reconstructed_symbols.cpp.o	143d5b6debdccdb
+38	504	8010222883769132	CMakeFiles/Xenon.dir/xenon/core/arm32_hook.cpp.o	6cecf4c86d0d6496
+45	863	8010222887339467	CMakeFiles/Xenon.dir/xenon/hooks/hook_registry.cpp.o	636692312dbaa9b8
+35	941	8010222888122208	CMakeFiles/Xenon.dir/xenon/core/xenon.cpp.o	924dcd9a7156f253
+19	977	8010222888469106	CMakeFiles/Xenon.dir/xenon/core/hook.cpp.o	6200e4d99379f02c
+977	1320	8010222891796992	C:/Users/nydil/source/repos/PvZ-Xenon/app/build/intermediates/cxx/Debug/5s6j334e/obj/armeabi-v7a/libXenon.so	bcfed78d15a251d8

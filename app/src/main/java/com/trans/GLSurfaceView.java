@@ -44,17 +44,43 @@ public class GLSurfaceView extends android.opengl.GLSurfaceView {
 
     /** Called from native: AGViewSwapBuffers */
     public void swapBuffers() {
-        requestRender();
+        javax.microedition.khronos.egl.EGL10 egl = (javax.microedition.khronos.egl.EGL10) javax.microedition.khronos.egl.EGLContext.getEGL();
+        javax.microedition.khronos.egl.EGLDisplay display = egl.eglGetCurrentDisplay();
+        javax.microedition.khronos.egl.EGLSurface surface = egl.eglGetCurrentSurface(javax.microedition.khronos.egl.EGL10.EGL_DRAW);
+        if (display != javax.microedition.khronos.egl.EGL10.EGL_NO_DISPLAY && surface != javax.microedition.khronos.egl.EGL10.EGL_NO_SURFACE) {
+            egl.eglSwapBuffers(display, surface);
+        }
     }
 
     /** Called from native: AGViewPrepare */
     public void prepare() {
-        onResume();
+        // PopCap's custom GLThread had a prepare() method to check thread state.
+        // With standard android.opengl.GLSurfaceView, this is a no-op.
+    }
+
+    private final java.util.ArrayList<Runnable> mEventQueue = new java.util.ArrayList<>();
+
+    @Override
+    public void queueEvent(Runnable r) {
+        synchronized (this) {
+            mEventQueue.add(r);
+        }
+        // Wake up the GLThread to ensure events are processed if it's sleeping.
+        super.queueEvent(this::handleEvents);
     }
 
     /** Called from native via GameView.update() */
     public void handleEvents() {
-        // Original GLThread event pump — no-op on platform GLSurfaceView
+        while (true) {
+            Runnable r;
+            synchronized (this) {
+                if (mEventQueue.isEmpty()) return;
+                r = mEventQueue.remove(0);
+            }
+            if (r != null) {
+                r.run();
+            }
+        }
     }
 
     public void update() {

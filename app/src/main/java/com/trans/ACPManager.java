@@ -130,10 +130,19 @@ public class ACPManager {
 
     public boolean hasFile(String path) {
         loadFileMap();
+        InputStream in = null;
         try {
-            return mAssets.open(getFileName(path)) != null;
+            in = mAssets.open(getFileName(path));
+            return in != null;
         } catch (IOException e) {
             return false;
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                }
+            }
         }
     }
 
@@ -154,14 +163,17 @@ public class ACPManager {
     }
 
     public AssetFileDescriptor openFd(String path) {
+        android.util.Log.d("ACPManager", "openFd: " + path);
         try {
             return mAssets.openFd(getFileName(path));
         } catch (IOException e) {
+            android.util.Log.e("ACPManager", "openFd failed: " + path);
             return null;
         }
     }
 
     public void beginStream(String path) throws Exception {
+        android.util.Log.d("ACPManager", "beginStream: " + path);
         if (mStream != null) {
             throw new Exception("beginStream called while another stream is still open");
         }
@@ -200,5 +212,14 @@ public class ACPManager {
         } catch (IOException ignored) {
         }
         return mBuffer;
+    }
+
+    public long skip(int bytes) {
+        if (mStream == null) return 0;
+        try {
+            return mStream.skip(bytes);
+        } catch (IOException e) {
+            return 0;
+        }
     }
 }

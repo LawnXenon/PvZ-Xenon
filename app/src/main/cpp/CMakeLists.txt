@@ -20,6 +20,7 @@ include_directories(
 set(SOURCE_FILES
     xenon/core/xenon.cpp
     xenon/core/hook.cpp
+    xenon/core/arm32_hook.cpp
     xenon/original/original_jni.cpp
     xenon/original/original_symbols.cpp
     xenon/reconstructed/reconstructed_symbols.cpp

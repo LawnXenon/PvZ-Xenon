@@ -7,34 +7,34 @@
 namespace Xenon {
     namespace Hooks {
 
+        static void RegisterIfResolved(const char* name, void* target, void* detour, void** trampoline) {
+            if (!target) {
+                LOGW("Hook skipped (symbol missing): %s", name);
+                return;
+            }
+            RegisterHook(name, target, detour, trampoline);
+        }
+
         bool RegisterAllHooks() {
-            LOGI("Xenon Hook Registry: Registering active function-by-function hooks...");
+            LOGI("Xenon Hook Registry: registering hooks...");
 
-            // 1. Hook Coin::IsSun
-            RegisterHook(
-                "Coin::IsSun", 
-                (void*)Original::Coin_IsSun, 
-                (void*)Reconstructed::Detour_Coin_IsSun, 
-                (void**)&Reconstructed::Original_Coin_IsSun
-            );
+            RegisterIfResolved("Coin::IsSun",
+                (void*)Original::Coin_IsSun,
+                (void*)Reconstructed::Detour_Coin_IsSun,
+                (void**)&Reconstructed::Original_Coin_IsSun);
 
-            // 2. Hook Board::DrawHouseDoorBottom
-            RegisterHook(
-                "Board::DrawHouseDoorBottom", 
-                (void*)Original::Board_DrawHouseDoorBottom, 
-                (void*)Reconstructed::Detour_Board_DrawHouseDoorBottom, 
-                (void**)&Reconstructed::Original_Board_DrawHouseDoorBottom
-            );
+            RegisterIfResolved("Board::DrawHouseDoorBottom",
+                (void*)Original::Board_DrawHouseDoorBottom,
+                (void*)Reconstructed::Detour_Board_DrawHouseDoorBottom,
+                (void**)&Reconstructed::Original_Board_DrawHouseDoorBottom);
 
-            // 3. Hook Sexy::ResourceManager::FontRes::DeleteResource
-            RegisterHook(
-                "Sexy::ResourceManager::FontRes::DeleteResource", 
-                (void*)Original::Sexy_ResourceManager_FontRes_DeleteResource, 
-                (void*)Reconstructed::Detour_Sexy_ResourceManager_FontRes_DeleteResource, 
-                (void**)&Reconstructed::Original_Sexy_ResourceManager_FontRes_DeleteResource
-            );
 
-            LOGI("Xenon Hook Registry: All active hooks registered successfully.");
+            RegisterIfResolved("Sexy::ResourceManager::FontRes::DeleteResource",
+                (void*)Original::Sexy_ResourceManager_FontRes_DeleteResource,
+                (void*)Reconstructed::Detour_Sexy_ResourceManager_FontRes_DeleteResource,
+                (void**)&Reconstructed::Original_Sexy_ResourceManager_FontRes_DeleteResource);
+
+            LOGI("Xenon Hook Registry: registration pass complete.");
             return true;
         }
 
